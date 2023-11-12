@@ -11,23 +11,66 @@
             <div class="row" style="margin-top: 20px;">
             {% for restaurant in chunk %}
                 <div class="col-3">
-                    <div class="card h-100">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ restaurant.name }}</h5>
-                            <p class="card-text">{{ restaurant.short_description }}</p>
-                            <div>
+                    <a href="{% url 'restaurants-detail' restaurant.id %}" style="color: inherit; text-decoration: none;">
+                        <div class="card h-100">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ restaurant.name }}</h5>
+                                <p class="card-text">{{ restaurant.short_description }}</p>
+                            </div>
+                            <div class="card-footer text-body-secondary">
                                 <i class="bi bi-star"></i>
                                 <span>
                                     {{ restaurant.rating|floatformat:"1" }}
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
             </div>
         {% endfor %}
+        {% if page_restaurants.has_other_pages %}
+        <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="col">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if page_restaurants.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link">Previous</a>
+                            </li>
+                        {% endif %}
+
+                        {% for page_number in page_restaurants.paginator.page_range %}
+                            {% if page_restaurants.number == page_number %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">{{ page_number }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_restaurants.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        {% endif %}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
+        {% endif %}
     </div>
 {% endblock content %}

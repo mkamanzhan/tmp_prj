@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.contrib import messages
 
 from src.restaurants.models import Restaurant, Review
 from src.restaurants.utils import divide_chunks
@@ -17,11 +18,40 @@ def main(request):
         page_restaurants = paginator.get_page(page_number)
         restaurants_chunks = divide_chunks(page_restaurants, size=4)
         context = {
+            "page_restaurants": page_restaurants,
             "restaurants_chunks": restaurants_chunks,
         }
         return HttpResponse(template.render(context, request))
     return redirect("main")
 
+
+def restaurants_detail_view(request, restaurant_id):
+    if request.method == "GET":
+        template = loader.get_template("pages/restaurants_detail.html")
+        restaurant = get_object_or_404(Restaurant, id=restaurant_id)
+        reviews = Review.objects.filter(restaurant_id=restaurant_id).order_by("-id")
+        context = {"restaurant": restaurant, "reviews": reviews}
+        return HttpResponse(template.render(context, request))
+    return redirect("main")
+
+
+def reviews_view(request):
+    if request.method == "POST":
+        restaurant_id = request.POST.get("restaurant_id")
+        user_id = request.user.id
+        text = request.POST.get("text")
+        short_review = request.POST.get("short_review")
+        rating = request.POST.get("rating")
+        Review.objects.create(
+            restaurant_id=restaurant_id,
+            user_id=user_id,
+            text=text,
+            short_review=short_review,
+            rating=rating,
+        )
+        messages.success(request, "You have successfully added a review")
+        return redirect("restaurants-detail", restaurant_id=restaurant_id)
+    return redirect("main")
 
 # def main(request):
 #     template = loader.get_template("index.html")

@@ -17,4 +17,6 @@ class Review(models.Model):
     id = models.BigAutoField(primary_key=True)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    short_review = models.CharField(max_length=250, verbose_name="Short review")
     text = models.TextField(verbose_name="Text")
+    rating = models.FloatField(verbose_name="Rating")
