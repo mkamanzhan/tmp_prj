@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/main.css' %}">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.12.0/jquery.validate.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.12.0/additional-methods.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="{% static 'script/main.js' %}"></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ITStep: Форма</title>
+</head>
+<body>
+<div id='page'>
+    <div id="slip-menu">
+        <span>
+            <img style="width: 50px" src="/media/logo.png">
+            <div id='logo-text'>
+                <h1>STEP</h1><br>
+                <p>IT ACADEMY</p>
+            </div>
+        </span>
+        <ul>
+            <li style="color: #96a8ff">ITSTEP</li>
+            <li><a href="{% url 'main' %}">Главная</a></li>
+            <li><a href="{% url 'students' %}">Ученики</a></li>
+            <li>Достижения</li>
+            <li>Форма</li>
+            <li>Контакты</li>
+        </ul>
+        <div id="admin-button-sticky" style="color: white">
+            {% if user.is_authenticated %}
+                        {{ user }}
+            {% else %}
+                <p><a href="{% url 'login' %}">ВОЙТИ</a></p>
+            {% endif %}
+        </div>
+    </div>
+    <menu>
+        <ul>
+            <li style="color: #96a8ff">ITSTEP</li>
+            <li><a href="{% url 'index' %}">Главная</a></li>
+            <li><a href="{% url 'students' %}">Ученики</a></li>
+            <li>Достижения</li>
+            <li>Форма</li>
+            <li>Контакты</li>
+        </ul>
+    </menu>
+    <div id="logo">
+        <span>
+            <img style="width: 50px" src="/media/logo.jpeg">
+            <div id='logo-text'>
+                <h1>STEP</h1><br>
+                <p>IT ACADEMY</p>
+            </div>
+        </span>
+        <div id="search">
+            <input type="text" placeholder="поиск по сайту">
+            <img src="https://cdn2.iconfinder.com/data/icons/user-interface-169/32/search-256.png">
+        </div>
+        <div id="admin-button">
+            {% if user.is_authenticated %}
+                <div id="login-plus">
+                    {% for pro in prof %}
+                        <img src="{{ pro.img }}">
+                    {% endfor %}
+                        {{ user }}
+                </div>
+            {% else %}
+                <p><a href="{% url 'login' %}">ВОЙТИ</a></p>
+            {% endif %}
+        </div>
+        <div id="user-menu">
+            <p>Мой аккаунт</p>
+            <p>Мои задания</p>
+            <p>Настройки</p>
+            <a href="{% url 'logout' %}" style="color: black"><p>Выйти</p></a>
+        </div>
+    </div>
+    <main id='main'>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+    <footer>
+        <div id='footer'>
+            <div id='col-1'>
+                <p>Позвоните нам по телефону:</p>
+                <p>8 (7172) 77-77-77</p>
+            </div>
+            <div id='col-2'>
+
+            </div>
+            <div id='col-3'>
+                <img style="width: 50px; filter: invert(1);" src="https://cdn4.iconfinder.com/data/icons/doodle-4/158/send-256.png"><br>
+                <a href="/admin">ADMIN PANEL</a><br>
+                <a href="/api/token/">TOKEN</a><br>
+                <a href="/user/active-profiles/">ACTIVE PROFILES</a>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&family=Merriweather:wght@700&display=swap');
+
+#publish {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+#pub-title {
+    background-color: #96a8ff;
+    font-size: 24px;
+    font-family: 'Golos Text', sans-serif;
+    font-weight: bold;
+    height: 60px;
+    display: inline-grid;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+#img {
+    overflow: hidden;
+    height: 400px;
+}
+#img img {
+    height: 400px;
+}
+
+#pub-text {
+    font-family: 'Golos Text', sans-serif;
+    display: inline-grid;
+    padding: 30px;
+    text-align: left;
+}
+
+#comment {
+    display: grid;
+    justify-content: center;
+    font-family: 'Golos Text', sans-serif;
+    color: grey;
+    text-align: left;
+}
+
+.com {
+    margin: 5px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    min-height: 60px;
+    width: 800px;
+    padding: 10px;
+}
+.user {
+    display: grid;
+    background-color: grey;
+    color: white;
+    margin: 0;
+    padding: 5px;
+    font-size: 13px;
+}
+.com-text {
+    display: grid;
+    align-items: center;
+    min-height: 40px;
+    margin: -10px 10px 0 10px;
+}
+#id_text {
+    resize: none;
+    outline: none;
+    width: 700px;
+}
+
+#form label {
+    visibility: hidden;
+    position: absolute;
+}

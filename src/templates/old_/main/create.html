@@ -1,0 +1,22 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static 'script/create.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style/create.css' %}">
+    <div>
+        {% if user.is_authenticated %}
+            <div class="create-box">
+                <h3>Добавить публикацию</h3>
+                <form id="form" method="POST" action="/posts/">
+                    {% csrf_token %}
+                    <p>Заголовок</p>
+                    <input type="text" name="title" required id="id_title">
+                    <p>Текст поста</p>
+                    <textarea name="text" cols="40" rows="10" maxlength="100" required="" id="id_text"></textarea>
+                    <input type="hidden" name="user_id" value="{{ user.id }}"><br>
+                    <input type="submit" id="submit-button" value="ОПУБЛИКОВАТЬ">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

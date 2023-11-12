@@ -1,0 +1,70 @@
+.login-block {
+    text-align: left;
+    margin: 50px 0 0 50px;
+    padding: 10px 20px 30px 20px;
+    display: inline-block;
+    border-radius: 20px;
+    transition: .5s;
+}
+.stud-log {
+    border: 1px solid #96a8ff;
+    box-shadow: 0 0 5px #96a8ff;
+}
+.stud-log:hover { scale: 1.1; }
+.stud-log:hover ^ #login-block-parent:nth-child(2) { scale: 0.9; }
+
+.new-log {
+    border: 1px solid #76fc74;
+    box-shadow: 0 0 5px #76fc74;
+}
+.new-log:hover { scale: 1.1; }
+.new-log:hover ^ #login-block-parent:nth-child(1) { scale: 0.9; }
+
+#login-user {
+    outline: none;
+    margin: 20px 0 0 20px;
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+label {
+    min-width: 160px;
+    display: inline-block;
+}
+
+#login-block-parent {
+    text-align: center;
+    display: inline-block;
+}
+
+#login-button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    margin: 20px 0 0 0;
+    border-radius: 10px;
+    background-color: #96a8ff;
+}
+
+#login-button:hover {
+    cursor: pointer;
+    background-color: #c4ceff;
+}
+
+h3 {
+    text-align: center;
+}
+
+#register-button {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: #76fc74;
+    margin: 20px 0 0 0;
+}
+
+#register-button:hover {
+    cursor: pointer;
+    background-color: #98ff96;
+}

@@ -1,0 +1,66 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+    {% load static %}
+    <script src="{% static 'script/index.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style/index.css' %}">
+    <div id="content">
+        <section id='news' uk-grid="masonry: true">
+            {% for pu in pub %}
+                <div id="pub-box">
+                    <div id="img">
+                        <a href="{% url 'posts_detail' pu.id %}"><img src="/media/{{ pu.img }}" /></a>
+                    </div>
+                    <div id="pub-title">
+                            <a href="{% url 'posts_detail' pu.id %}">{{ pu.title }}</a>
+                    </div>
+                    <div id="pub-text">
+                        {{ pu.text }}
+                    </div>
+                    <div id="pub-info">
+                        <span style="text-align: left">{{ pu.user }}</span>
+                        <span style="text-align: right">{{ pu.published }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            <div id="pub-box" style="justify-items: center; align-content: center">
+                    <span class="post-text">
+                        {% if user.is_authenticated %}
+                            <a href="/create"><span class="plus">&#10010;</span></a>
+                            <p>СОЗДАТЬ ПОСТ</p>
+                        {% else %}
+                            <a href="user/login"><span class="plus">&#10010;</span></a>
+                            <p>СОЗДАТЬ ПОСТ</p>
+                        {% endif %}
+                    </span>
+            </div>
+        </section>
+        <section id="right-menu">
+            {% if user.is_authenticated %}
+                <div id="profile-info">
+                    <h3 style="margin-bottom: 10px">{{ user }}</h3>
+                    <h5><span>Имя: </span>{{ user.first_name }}</h5>
+                    <h5><span>Фамилия: </span>{{ user.last_name }}</h5>
+                    <h5><span>E-mail: </span>{{ user.email }}</h5>
+                    <h5><span>Дата регистрации: </span>{{ user.date_joined }}</h5>
+                    {{ profile.id }}
+                </div>
+            {% else %}
+                <div id="auth">
+                    <h3>АВТОРИЗАЦИЯ</h3>
+                    <h4>Введите ваши данные для входа в портал и использование всех привелегии</h4>
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="text" id="login-user" name="username" placeholder="Логин"><br>
+                        <input type="password" id="login-user" name="password" placeholder="Пароль"><br>
+                        <input type="submit" id="login-button" value="ВОЙТИ">
+                    </form>
+                </div>
+            {% endif %}
+            <div class="calendar-wrapper">
+                <button id="btnPrev" type="button">Предыдущий</button>
+                <button id="btnNext" type="button">Следующий</button>
+                <div id="divCal"></div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

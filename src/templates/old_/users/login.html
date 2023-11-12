@@ -1,0 +1,42 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style/login.css' %}">
+    <div style="text-align: center">
+        <div id="login-block-parent">
+
+            <div class="login-block stud-log">
+                <h2 style="margin: 0; text-align: center">поле для</h2>
+                <h1 style="margin: 0; text-align: center; color: #96a8ff">СТУДЕНТОВ</h1>
+                <h3>Введите данные для входа</h3>
+
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <label>Имя пользователя</label>
+                    <input type="text" id="login-user" name="username"><br>
+                    <label>Пароль</label>
+                    <input type="password" id="login-user" name="password"><br>
+                    <input type="submit" id="login-button" value="ВОЙТИ">
+                </form>
+            </div>
+
+            <div class="login-block new-log">
+                <h2 style="margin: 0; text-align: center">поле для</h2>
+                <h1 style="margin: 0; text-align: center; color: #76fc74">НОВИЧКОВ</h1>
+                <h3>Нет аккаунта? Зарегестрируйся</h3>
+
+                <form action="{% url 'auth' %}" method="POST">
+                    {% csrf_token %}
+                    <label>Имя пользователя</label>
+                    <input type="text" id="login-user" name="username"><br>
+                    <label>Пароль</label>
+                    <input type="password" id="login-user" name="password"><br>
+
+                    <input type="submit" id="register-button" value="РЕГИСТРАЦИЯ">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

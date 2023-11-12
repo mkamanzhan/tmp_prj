@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text&family=Merriweather:wght@700&display=swap');
+#content {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+}
+
+                                            /*SECTION NEWS*/
+#news {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    margin: 0 25px 50px 50px;
+}
+
+#pub-box {
+    border: 1px solid black;
+    display: grid;
+    margin: 30px 5px 0px 5px;
+    max-height: 500px;
+    grid-template-rows: min-content min-content auto 20px;
+    transition: all .5s;
+    z-index: 3;
+    width: 270px;
+}
+
+#pub-title {
+    background-color: #96a8ff;
+    width: 250px;
+    font-family: 'Golos Text', sans-serif;
+    padding: 10px;
+}
+#pub-title a:hover {
+    color: yellow;
+}
+
+#pub-text {
+    width: 250px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: scroll;
+    font-size: 14px;
+    text-align: left;
+    font-family: 'Golos Text', sans-serif;
+}
+#pub-text::-webkit-scrollbar {
+  width: 0;
+}
+
+#pub-info {
+    display: grid;
+    background-color: lightgray;
+    font-size: 12px;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    padding: 0 5px 0 5px;
+    align-items: center;
+}
+
+#img {
+    width: 270px;
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: -10px;
+}
+
+#img img {
+    width: 270px;
+}
+.plus {
+    color: black;
+    font-size: 30px;
+    border: 3px solid black;
+    border-radius: 50%;
+    display: block;
+    width: 40px;
+    padding: 9px;
+    transition: all .5s;
+    margin-left: 29px;
+    margin-bottom: 10px;
+}
+.plus:hover {
+    color: greenyellow;
+    border: 3px solid greenyellow;
+}
+
+.post-text:hover {
+    color: greenyellow;
+    transition: all .5s;
+    align-items: center;
+    text-align: center;
+}
+
+                                        /*RIGHT SECTION*/
+#right-menu {
+    border-left: 4px solid lightgray;
+    margin: 10px 0px 10px 0px;
+    padding: 20px 50px 0 25px;
+    min-width: 236px;
+}
+
+#auth {
+    background-color: #242321;
+    padding: 14px;
+    color: white;
+    text-align: left;
+}
+#profile-info {
+    background-color: #242321;
+    padding: 14px;
+    color: white;
+    text-align: left;
+}
+#login-button {
+    width: 208px;
+    margin: 5px 0 5px 0;
+    height: 30px;
+}
+
+#login-user{
+    width: 95%;
+    margin: 5px 0 5px 0;
+    height: 30px;
+    outline: none;
+}
+h3 {
+    font-size: 14px;
+    margin: 0;
+}
+h4 {
+    font-size: 12px;
+    margin: 0;
+    color: lightgray;
+    font-weight: normal;
+}
+h5 {
+    font-size: 12px;
+    margin: 0;
+    color: lightgray;
+    font-weight: normal;
+    margin: 0;
+}
+h5 span {
+    color: white;
+    font-weight: bold;
+}
+
+                                        /*CALENDAR*/
+.calendar-wrapper {
+    margin: 3em auto;
+    background: #fff;
+}
+.calendar-wrapper table {
+    clear: both;
+    width: 100%;
+    border: 1px solid #dcdcff;
+    border-radius: 3px;
+    border-collapse: collapse;
+    color: #444;
+}
+.calendar-wrapper td {
+    height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    border-right: 1px solid #dcdcff;
+    border-top: 1px solid #dcdcff;
+    width: 31px;
+    font-size: 1em;
+}
+.calendar-wrapper thead td {
+    border: none;
+    color: #28283b;
+    text-transform: uppercase;
+    font-size: 1em;
+}
+.calendar-wrapper td.not-current {
+    color: #c0c0c0;
+    font-size: 0.7em;
+}
+.calendar-wrapper td.today {
+    font-weight: 700;
+    color: white;
+    font-size: 0.9em;
+    background-color: #96a8ff;
+}
+.calendar-wrapper btnPrev {
+    float: left;
+    margin-bottom: 20px;
+}
+#btnPrev:before {
+    content: '🠔';
+    font-family: FontAwesome;
+    padding-right: 4px;
+    margin-left: -55px;
+}
+#btnNext {
+    float: right;
+    margin-bottom: 20px;
+}
+#btnNext:after {
+    content: '🠖';
+    font-family: FontAwesome;
+    padding-left: 4px;
+}
+#btnPrev,
+#btnNext {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.6em;
+    color: #c0c0c0;
+    cursor: pointer;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    vertical-align: top;
+}
+#btnPrev:hover,
+#btnNext:hover {
+    color: #28283b;
+    font-weight: bold;
+}
