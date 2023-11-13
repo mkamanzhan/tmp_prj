@@ -1,11 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.template import loader
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import serializers
 from django.shortcuts import redirect
 from django.contrib import messages
 
@@ -43,6 +39,29 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "You have successfully logged out")
+    return redirect("main")
+
+
+def profile_view(request):
+    if request.method == "GET":
+        template = loader.get_template("pages/profile.html")
+        user_id = request.user.id
+        profile = Profile.objects.get(user_id=user_id)
+        context = {"profile": profile}
+        return HttpResponse(template.render(context, request))
+    if request.method == "POST":
+        user = request.user
+        profile = Profile.objects.get(user_id=user.id)
+        first_name = request.POST["first_name"]
+        last_name = request.POST["last_name"]
+        phone = request.POST["phone"]
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+        profile.phone = phone
+        profile.save()
+        messages.success(request, "You have successfully updated your profile")
+        return redirect("profile")
     return redirect("main")
 
 

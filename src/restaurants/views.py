@@ -53,6 +53,13 @@ def reviews_view(request):
         return redirect("restaurants-detail", restaurant_id=restaurant_id)
     return redirect("main")
 
+
+def about_view(request):
+    if request.method == "GET":
+        template = loader.get_template("pages/about.html")
+        return HttpResponse(template.render({}, request))
+
+
 # def main(request):
 #     template = loader.get_template("index.html")
 #     pub = Post.objects.order_by("published")

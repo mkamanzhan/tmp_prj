@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load custom_tags %}
 {% block title %}Ping Rests - {{ restaurant.name }}{% endblock %}
 {% block content %}
     <div class="row justify-content-md-center">
@@ -39,6 +40,7 @@
                         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="short_review">
                     </div>
                     <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Review</label>
                         <textarea rows="8" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="text"></textarea>
                         <div id="emailHelp" class="form-text">Write you review here</div>
                     </div>
@@ -64,7 +66,7 @@
                         <div class="col col-6">
                             <div class="card">
                                 <h5 class="card-header">
-                                    {{ review.short_review }}
+                                    {% censor review.short_review %}
                                     <div class="float-end">
                                         <i class="bi bi-star"></i>
                                         <span>
@@ -73,7 +75,7 @@
                                     </div>
                                 </h5>
                                 <div class="card-body">
-                                    <p class="card-text">{{ review.text }}</p>
+                                    <p class="card-text">{% censor review.text %}</p>
                                 </div>
                                 <div class="card-footer text-body-secondary">
                                     {{ review.user.email }}
