@@ -4,7 +4,7 @@ from src.profiles.models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("user", "phone", "is_banned")
 
 
 admin.site.register(Profile, ProfileAdmin)

@@ -9,7 +9,11 @@ from src.restaurants.views import (
 
 urlpatterns = [
     path("", main, name="main"),
-    path("restaurants/<int:restaurant_id>/", restaurants_detail_view, name="restaurants-detail"),
+    path(
+        "restaurants/<int:restaurant_id>/",
+        restaurants_detail_view,
+        name="restaurants-detail",
+    ),
     path("reviews/", reviews_view, name="reviews"),
     path("about/", about_view, name="about"),
 ]

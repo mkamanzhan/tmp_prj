@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+{% load static %}
 {% block title %}Ping Rests - Main Page{% endblock %}
 {% block content %}
     <div class="row justify-content-md-center">
@@ -7,13 +8,32 @@
                 <h1>Restaurants</h1>
             </div>
         </div>
+        <!-- add input for sorting restaurants -->
+        <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <select class="form-select" aria-label="Default select example" onchange="location = this.value;">
+                        <option value="#" selected>Select sorting</option>
+                        <option value="?sort_by=created_at_desc">Created Desc</option>
+                        <option value="?sort_by=created_at_asc">Created Asc</option>
+                        <option value="?sort_by=rating_desc">Rating Desc</option>
+                        <option value="?sort_by=rating_asc">Rating Asc</option>
+                        <option value="?sort_by=name_desc">Name Desc</option>
+                        <option value="?sort_by=name_asc">Name Asc</option>
+                    </select>
+                </div>
+        </div>
+        
         {% for chunk in restaurants_chunks %}
             <div class="row" style="margin-top: 20px;">
             {% for restaurant in chunk %}
                 <div class="col-3">
                     <a href="{% url 'restaurants-detail' restaurant.id %}" style="color: inherit; text-decoration: none;">
                         <div class="card h-100">
-                            <img src="..." class="card-img-top" alt="...">
+                            {% if restaurant.image %}
+                                <img src="{{ restaurant.image.url }}" class="card-img-top">
+                            {% else %}
+                                <img src="{% static 'img/restaurant.jpg' %}" class="card-img-top">
+                            {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">{{ restaurant.name }}</h5>
                                 <p class="card-text">{{ restaurant.short_description }}</p>

@@ -9,10 +9,28 @@ from src.restaurants.models import Restaurant, Review
 from src.restaurants.utils import divide_chunks
 
 
+def get_sort_by(sort_by_val):
+    if sort_by_val == "created_at_desc":
+        return "-id"
+    elif sort_by_val == "created_at_asc":
+        return "id"
+    elif sort_by_val == "rating_desc":
+        return "-rating"
+    elif sort_by_val == "rating_asc":
+        return "rating"
+    elif sort_by_val == "name_desc":
+        return "-name"
+    elif sort_by_val == "name_asc":
+        return "name"
+    return "-rating"
+
+
 def main(request):
     if request.method == "GET":
         template = loader.get_template("pages/main.html")
-        restaurants = Restaurant.objects.order_by("-rating")
+        sort_by_val = request.GET.get("sort_by")
+        sort_by = get_sort_by(sort_by_val)
+        restaurants = Restaurant.objects.order_by(sort_by)
         paginator = Paginator(restaurants, 20)
         page_number = request.GET.get("page", 1)
         page_restaurants = paginator.get_page(page_number)

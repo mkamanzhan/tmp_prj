@@ -4,11 +4,11 @@ from src.restaurants.models import Restaurant, Review
 
 
 class RestaurantAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("name", "address", "is_active", "rating")
 
 
 class ReviewAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("restaurant", "user", "text", "rating")
 
 
 admin.site.register(Restaurant, RestaurantAdmin)

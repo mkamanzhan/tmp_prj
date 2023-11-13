@@ -2,30 +2,44 @@
 {% load static %}
 {% block title %}Ping Rests - Profile{% endblock %}
 {% block content %}
-<div class="row justify-content-md-center">
-    <div class="col col-lg-4">
-        <h1>Profile</h1>
-        <img src="{% static 'img/ava.png' %}" class="img-fluid" alt="Profile Image">
-        <form action="{% url 'profile' %}" method="POST">
+<div class="row">
+    <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+        <div class="row justify-content-md-center">
             {% csrf_token %}
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" disabled value="{{ user.email }}">
+            <div class="col col-lg-2 text-center">
+                {% if profile.image %}
+                    <img src="{{ profile.image.url }}" class="img-fluid" alt="Profile Image" style="width: 100%; margin-top: 70px">
+                {% else %}
+                    acdc
+                    <img src="{% static 'img/ava.png' %}" class="img-fluid" alt="Profile Image" style="width: 100%; margin-top: 70px">
+                {% endif %}
             </div>
-            <div class="mb-3">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+
+            <div class="col col-lg-4">
+                <h1>Profile</h1>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" disabled value="{{ user.email }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" value="{{ profile.phone }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Profile Image</label>
+                        <input class="form-control" type="file" name="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" name="phone" value="{{ profile.phone }}">
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
-    </div>
-</div>  
+        </div>
+    </form>
+</div>
 {% endblock %}

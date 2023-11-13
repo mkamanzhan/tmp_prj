@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.template import loader
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
 
 from src.profiles.models import Profile
 
@@ -46,7 +48,7 @@ def profile_view(request):
     if request.method == "GET":
         template = loader.get_template("pages/profile.html")
         user_id = request.user.id
-        profile = Profile.objects.get(user_id=user_id)
+        profile = get_object_or_404(Profile, user_id=user_id)
         context = {"profile": profile}
         return HttpResponse(template.render(context, request))
     if request.method == "POST":
@@ -55,78 +57,13 @@ def profile_view(request):
         first_name = request.POST["first_name"]
         last_name = request.POST["last_name"]
         phone = request.POST["phone"]
+        image = request.FILES.get("image")
         user.first_name = first_name
         user.last_name = last_name
         user.save()
         profile.phone = phone
+        profile.image = image
         profile.save()
         messages.success(request, "You have successfully updated your profile")
         return redirect("profile")
     return redirect("main")
-
-
-# def login_view(request):
-#     if request.POST:
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-
-#         user = authenticate(request, username=username, password=password)
-
-#         if user is not None:
-#             login(request, user)
-#             return redirect("index")
-#         else:
-#             return HttpResponse("Login error")
-#     else:
-#         return render(request, "users/login.html", {})
-
-
-# def auth_view(request):
-#     if request.POST:
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-
-#         try:
-#             user = User.objects.get(username=username)
-#             if user is not None:
-#                 return HttpResponse("Такой пользователь существует!")
-#         except User.DoesNotExist:
-#             User.objects.create_user(username, password=password)
-#             return render(request, "users/login.html", {})
-
-#     else:
-#         return render(request, "users/auth.html", {})
-
-
-# def logout_view(request):
-#     logout(request)
-#     return redirect("index")
-
-
-# class UserSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = "__all__"
-
-
-# class ProfileSerializer(serializers.ModelSerializer):
-#     user = UserSerializer()
-
-#     class Meta:
-#         model = Profile
-#         fields = "__all__"
-
-
-# class ActiveProfilesList(APIView):
-#     def get(self, request, format=None):
-#         profiles = Profile.objects.filter(is_banned=False)
-#         serializer = ProfileSerializer(profiles, many=True)
-#         return Response(serializer.data)
-
-
-# def profile(request):
-#     user_id = request.user.id
-#     template = loader.get_template("main/index.html")
-#     profile = Profile.objects.get(user_id=user_id)
-#     context = {"profile": profile}
-#     return HttpResponse(template.render(context, request))
